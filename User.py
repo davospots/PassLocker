@@ -60,6 +60,6 @@ class Credential:
             if credential.account == account:
                 return credential
 
-    def generatePass(stringLength =8):
+    def generate_pass(string_length =8):
         password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
-        return ''.join(random.choice(password) for i in range(stringLength))
+        return ''.join(random.choice(password) for i in range(string_length))
