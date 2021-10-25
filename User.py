@@ -55,7 +55,11 @@ class Credential:
         pyperclip.copy(found_acc.password)
 
     @classmethod
-    def find_by_acc(cls,account):
+    def find_by_acc(cls, account):
         for credential in cls.credential_list:
             if credential.account == account:
                 return credential
+
+    def generatePass(stringLength =8):
+        password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
+        return ''.join(random.choice(password) for i in range(stringLength))
