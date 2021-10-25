@@ -42,7 +42,28 @@ class TestCredentials(unittest.TestCase):
         test_acc.save_account()
         self.assertEqual(len(Credential.credential_list),2)
 
-    def
+    def delete_acc(self):
+        self.new_account.save_account()
+        test_acc = Credential('Facebook', 'makaupete', '6qeq456')
+        test_acc.save_account()
+
+        self.new_account.del_account()
+        self.assertEqual(len(Credential.credential_list),1)
+
+    def find_by_acc(self):
+        self.new_account.save_account()
+        test_acc = Credential('Facebook', 'makaupete', '6qeq456')
+        test_acc.save_account()
+
+        credential = Credential.find_by_acc('Facebook')
+        self.assertEqual(credential.account,test_acc.account)
+
+    def test_display_all(self):
+        self.assertEqual(Credential.display_account(),Credential.credential_list)
+
+
+
+
 
 if __name__ == "__main__":
     unittest.main()
