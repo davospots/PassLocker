@@ -59,14 +59,76 @@ def pass_locker():
             password_choice = input().lower().strip()
             if password_choice == 'tp':
                 password = input('Enter Password\n')
-                print(password)
+
                 break
             elif password_choice == 'gp':
                 password = generate_password()
-                print(password)
+
                 break
             else:
                 print('Invalid Password please try again')
+        save_user(create_user(user_name, password))
+        print('*' * 85)
+        print(f'Hello {user_name}, Your account has been created successfully! Your Password is:{password}')
+        print('*' * 85)
+    elif the_code == 'li':
+        print('*' * 50)
+        print('Enter your username and password to login:')
+        print('*' * 50)
+        user_name = input('User Name: ')
+        password = input('Password: ')
+        login = login_user(user_name, password)
+        if login == login_user:
+            print(f'Hello{user_name}.Welcome Back')
+            print('\n')
+    while True:
+        print('Use these Short Codes to proceed: \n CC - Create new Credential\n DC - Display Credentials \n FC -Find '
+              'Credential \n D - Delete Credential \n EX - Exit \n')
+        the_code = input().lower().strip()
+        if the_code == 'cc':
+            print('Create New Credential')
+            print('.' * 20)
+
+            account = input('Account Name : ').lower()
+            user_name = input('User Name : ')
+            while True:
+                print('TP - To type your own password if you already have an account:\n GP - To generate random '
+                      'Password')
+                password_choice = input().lower().strip()
+                if password_choice == 'tp':
+                    password = input("Enter Your Own Password\n")
+                    break
+                elif password_choice == 'gp':
+                    password = generate_password()
+                    break
+                else:
+                    print("Invalid password please try again")
+            save_acc(make_acc(account, user_name, password))
+            print('\n')
+            print(f'Account: {account} Username: {user_name} Password: {password} created successfully ')
+            print('\n')
+        elif the_code == 'dc':
+            if display_acc_details():
+                print("Here's your list of accounts:")
+                print('\n')
+                for account in display_acc_details():
+                    print(f' Account:{account}\n User Name:{user_name}\n Password:{password}')
+            else:
+                print('You have no saved accounts')
+        elif the_code == 'fc':
+            search_acc =input('Enter the account you are looking for: ').lower()
+
+            if find_credential(search_acc):
+                print(f'Account Name: {account}')
+                print(f'User Name: {user_name} Password: {password}')
+        elif the_code == 'd':
+            print()
+        elif the_code == 'ex':
+            print(f'Goodbye{user_name}')
+            break
+
+    else:
+        print('Please enter valid input')
 
 
 pass_locker()
