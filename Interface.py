@@ -27,7 +27,7 @@ def make_acc(account, user_name, password):
 
 
 def save_acc(credentials):
-    credentials.save_user()
+    credentials.save_account()
 
 
 def display_acc_details():
@@ -42,9 +42,9 @@ def find_credential(account):
     return Credential.find_by_acc(account)
 
 
-def generate_pasword():
-    auto_password = Credential.generate_pass()
-    return auto_password
+def generate_password():
+    gen_pass = Credential.generate_password()
+    return gen_pass
 
 
 def pass_locker():
@@ -52,5 +52,21 @@ def pass_locker():
     the_code = input('').lower().strip()
     if the_code == 'ca':
         print('Sign Up')
-        print('*')
+        print('*' * 50)
+        user_name = input('User_name : ')
+        while True:
+            print("TP - To type your own password:\n GP - To generate Password")
+            password_choice = input().lower().strip()
+            if password_choice == 'tp':
+                password = input('Enter Password\n')
+                print(password)
+                break
+            elif password_choice == 'gp':
+                password = generate_password()
+                print(password)
+                break
+            else:
+                print('Invalid Password please try again')
+
+
 pass_locker()

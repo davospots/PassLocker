@@ -14,6 +14,10 @@ class User:
     def save_user(self):
         User.user_list.append(self)
 
+    @classmethod
+    def display_user(cls):
+        return cls.user_list
+
 
 class Credential:
     credential_list = []
@@ -60,6 +64,7 @@ class Credential:
             if credential.account == account:
                 return credential
 
-    def generate_pass(string_length =8):
-        password = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
-        return ''.join(random.choice(password) for i in range(string_length))
+    def generate_password(size=8, char=string.ascii_uppercase + string.ascii_lowercase + string.digits):
+
+        gen_pass = ''.join(random.choice(char) for _ in range(size))
+        return gen_pass
