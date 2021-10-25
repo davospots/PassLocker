@@ -30,7 +30,7 @@ def save_acc(credentials):
     credentials.save_account()
 
 
-def display_acc_details():
+def display_acc():
     return Credential.display_account()
 
 
@@ -103,28 +103,37 @@ def pass_locker():
                     break
                 else:
                     print("Invalid password please try again")
+
             save_acc(make_acc(account, user_name, password))
             print('\n')
             print(f'Account: {account} Username: {user_name} Password: {password} created successfully ')
             print('\n')
         elif the_code == 'dc':
-            if display_acc_details():
+            if display_acc():
                 print("Here's your list of accounts:")
                 print('\n')
-                for account in display_acc_details():
-                    print(f' Account:{account}\n User Name:{user_name}\n Password:{password}')
+                for account in display_acc():
+                    print(f' Account:{account}\n UserName:{user_name}\n Password:{password}')
             else:
                 print('You have no saved accounts')
         elif the_code == 'fc':
-            search_acc =input('Enter the account you are looking for: ').lower()
+            search_acc = input('Enter the account you are looking for: ').lower()
 
             if find_credential(search_acc):
                 print(f'Account Name: {account}')
-                print(f'User Name: {user_name} Password: {password}')
+                print(f'User Name: {user_name}')
+                print(f'Password: {password}')
         elif the_code == 'd':
-            print()
+            print('Which account do you want to delete?')
+            search_acc = input().lower()
+            if find_credential(search_acc):
+                search_acc = find_credential(search_acc)
+                print('_'*50)
+                search_acc.del_account()
+                print('\n')
+                print(f'the credentials for : {account} has been deleted')
         elif the_code == 'ex':
-            print(f'Goodbye{user_name}')
+            print(f'Goodbye {user_name}')
             break
 
     else:
