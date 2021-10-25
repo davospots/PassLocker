@@ -26,8 +26,8 @@ def make_acc(account, user_name, password):
     return new_acc
 
 
-def save_acc(credentials):
-    credentials.save_account()
+def save_account(new_acc):
+    new_acc.save_account()
 
 
 def display_acc():
@@ -104,31 +104,32 @@ def pass_locker():
                 else:
                     print("Invalid password please try again")
 
-            save_acc(make_acc(account, user_name, password))
+            save_account(make_acc(account, user_name, password))
             print('\n')
             print(f'Account: {account} Username: {user_name} Password: {password} created successfully ')
             print('\n')
         elif the_code == 'dc':
             if display_acc():
                 print("Here's your list of accounts:")
-                print('\n')
                 for account in display_acc():
-                    print(f' Account:{account}\n UserName:{user_name}\n Password:{password}')
+                    print(f'Account:{account}\n UserName:{user_name}\n Password:{password}')
             else:
                 print('You have no saved accounts')
         elif the_code == 'fc':
+
             search_acc = input('Enter the account you are looking for: ').lower()
 
             if find_credential(search_acc):
                 print(f'Account Name: {account}')
                 print(f'User Name: {user_name}')
                 print(f'Password: {password}')
+
         elif the_code == 'd':
             print('Which account do you want to delete?')
             search_acc = input().lower()
             if find_credential(search_acc):
                 search_acc = find_credential(search_acc)
-                print('_'*50)
+                print('_' * 50)
                 search_acc.del_account()
                 print('\n')
                 print(f'the credentials for : {account} has been deleted')
