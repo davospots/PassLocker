@@ -1,6 +1,8 @@
 import unittest
 from unittest import TestCase
 
+import pyperclip
+
 from User import User
 from User import Credential
 
@@ -38,9 +40,9 @@ class TestCredentials(unittest.TestCase):
 
     def save_many_acc(self):
         self.new_account.save_account()
-        test_acc = Credential('Facebook','makaupete','6qeq456')
+        test_acc = Credential('Facebook', 'makaupete', '6qeq456')
         test_acc.save_account()
-        self.assertEqual(len(Credential.credential_list),2)
+        self.assertEqual(len(Credential.credential_list), 2)
 
     def delete_acc(self):
         self.new_account.save_account()
@@ -48,7 +50,7 @@ class TestCredentials(unittest.TestCase):
         test_acc.save_account()
 
         self.new_account.del_account()
-        self.assertEqual(len(Credential.credential_list),1)
+        self.assertEqual(len(Credential.credential_list), 1)
 
     def find_by_acc(self):
         self.new_account.save_account()
@@ -56,13 +58,22 @@ class TestCredentials(unittest.TestCase):
         test_acc.save_account()
 
         credential = Credential.find_by_acc('Facebook')
-        self.assertEqual(credential.account,test_acc.account)
+        self.assertEqual(credential.account, test_acc.account)
 
     def test_display_all(self):
-        self.assertEqual(Credential.display_account(),Credential.credential_list)
+        self.assertEqual(Credential.display_account(), Credential.credential_list)
 
-
-
+    def copy_acc(self):
+        self.new_account.save_account()
+        test_acc = Credential('Facebook', 'makaupete', '6qeq456')
+        test_acc.save_account()
+        find_account = None
+        for credential in Credential.credential_list:
+            find_account = Credential.find_by_acc(credential.account)
+            return pyperclip.copy(self.new_account.account)
+        Credential.copy_account(self.new_account.account)
+        self.assertEqual('Facebook', pyperclip.paste())
+        print(pyperclip.paste())
 
 
 if __name__ == "__main__":
